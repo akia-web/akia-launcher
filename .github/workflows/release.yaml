@@ -30,8 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.Launcher_GITHUB_TOKEN }}
         with:
-          tag_name: v1.2  # Remplacez v1.0 par le tag de votre choix
-          release_name: Release v1.2  # Remplacez Release v1.0 par le nom de la release de votre choix
+          tag_name: v1.3  # Remplacez v1.0 par le tag de votre choix
+          release_name: Release v1.3  # Remplacez Release v1.0 par le nom de la release de votre choix
           draft: false
           prerelease: false
 
