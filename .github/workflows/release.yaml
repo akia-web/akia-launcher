@@ -30,9 +30,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.Launcher_GITHUB_TOKEN }}
       with:
-        tag_name: v1.1  # Remplacez v1.0 par le tag de votre choix
-        release_name: Release v1.1  # Remplacez Release v1.0 par le nom de la release de votre choix
-        body: Release version 1.1
+        tag_name: v1.2  # Remplacez v1.0 par le tag de votre choix
+        release_name: Release v1.2  # Remplacez Release v1.0 par le nom de la release de votre choix
+        body: Release version 1.2
         draft: false
         prerelease: false
 
@@ -46,4 +46,3 @@ jobs:
         asset_path: ./dist/akia-launcher.exe  # Remplacez le chemin par le chemin vers votre fichier .exe
         asset_name: akia-launcher.exe  # Remplacez akia-launcher.exe par le nom de votre fichier .exe
         asset_content_type: application/octet-stream
-        
