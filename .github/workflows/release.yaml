@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build EXE
+        run: pyinstaller akia-launcher.spec
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0  # Remplacez v1.0 par le tag de votre choix
+          release_name: Release v1.0  # Remplacez Release v1.0 par le nom de la release de votre choix
+          draft: false
+          prerelease: false
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v2
+        with:
+          name: akia-launcher-exe
+          path: dist/akia-launcher.exe
