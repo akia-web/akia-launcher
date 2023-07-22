@@ -144,6 +144,7 @@ class MainWindow(QMainWindow):
     def button_update(self):
         print(os.path.abspath("icone.ico"))
         print(os.path.dirname(os.path.abspath(sys.argv[0])))
+        
 
 
     def button_update2(self):
