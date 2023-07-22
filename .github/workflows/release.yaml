@@ -46,3 +46,4 @@ jobs:
         asset_path: ./dist/akia-launcher.exe  # Remplacez le chemin par le chemin vers votre fichier .exe
         asset_name: akia-launcher.exe  # Remplacez akia-launcher.exe par le nom de votre fichier .exe
         asset_content_type: application/octet-stream
+        
