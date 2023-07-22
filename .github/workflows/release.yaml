@@ -2,47 +2,41 @@ name: Release
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: windows-latest
-
+  release:
+    name: Release
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Build executable
-      run: pyinstaller --onefile akia-launcher.py
+      - name: Build EXE
+        run: pyinstaller akia-launcher.spec
 
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.Launcher_GITHUB_TOKEN }}
-      with:
-        tag_name: v1.2  # Remplacez v1.0 par le tag de votre choix
-        release_name: Release v1.2  # Remplacez Release v1.0 par le nom de la release de votre choix
-        body: Release version 1.2
-        draft: false
-        prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.Launcher_GITHUB_TOKEN }}
+        with:
+          tag_name: v1.2  # Remplacez v1.0 par le tag de votre choix
+          release_name: Release v1.2  # Remplacez Release v1.0 par le nom de la release de votre choix
+          draft: false
+          prerelease: false
 
-    - name: Upload executable
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.Launcher_GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/akia-launcher.exe  # Remplacez le chemin par le chemin vers votre fichier .exe
-        asset_name: akia-launcher.exe  # Remplacez akia-launcher.exe par le nom de votre fichier .exe
-        asset_content_type: application/octet-stream
+      - name: Upload EXE
+        uses: actions/upload-artifact@v2
+        with:
+          name: akia-launcher-exe
+          path: dist/akia-launcher.exe
